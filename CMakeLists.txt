@@ -4,4 +4,8 @@ project(MuJoConv)
 
 set(CMAKE_CXX_STANDARD 11)
 
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
+add_subdirectory(src)
+
 
