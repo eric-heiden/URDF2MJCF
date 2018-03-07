@@ -1,4 +1,0 @@
-[submodule "rapidxml"]
-	path = rapidxml
-	url = https://github.com/discordapp/rapidxml.git
-	branch = master
