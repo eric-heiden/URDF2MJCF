@@ -5,10 +5,11 @@
 #ifndef MUJOCONV_MUJOCONVERTER_H
 #define MUJOCONV_MUJOCONVERTER_H
 
-#include "mujoco.h"
-
+#include "MJModel.h"
 #include <string>
 #include <iostream>
+#include "rapidxml.hpp"
+#include "rapidxml_print.hpp"
 
 enum FileType {
   FILE_UNKNOWN = 0,
@@ -22,16 +23,12 @@ public:
 
   virtual ~MuJoConverter();
 
-  bool SaveModel();
-
   bool Init();
 
-  bool LoadModel();
-
-  void SetDefaultCam();
+  bool Convert();
 
 private:
-  mjModel* m_model = nullptr;
+  MJModel m_model;
   std::string m_keyPath;
   std::string m_in;
   std::string m_out;
@@ -39,6 +36,12 @@ private:
   char m_err[1000];
 
   inline FileType filetype(std::string file_path);
+
+  bool LoadModel();
+
+  bool SaveModel();
+
+  bool AddLightToMJCF(rapidxml::xml_document<>& doc, char *light_data, char *ground_data);
 };
 
 #endif //MUJOCONV_MUJOCONVERTER_H

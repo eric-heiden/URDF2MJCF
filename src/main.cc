@@ -1,6 +1,6 @@
 /// This project is used to convert URDF file to MuJoCo's MJCF file.
 /// The pipeline of this project is as following:
-/// TODO preprocess the urdf file, change DAE to STL, stl to STL, dae to STL
+/// 1. preprocess the urdf file, change DAE to STL, stl to STL, dae to STL
 /// 2. mj_LoadXML
 /// 3. insert camera, motors
 /// 4. Save model to MJCF file
@@ -21,15 +21,7 @@ int main(int argc, char **argv) {
     return -2;
   }
 
-  if (!muJoConverter.LoadModel()) {
-    std::cout << "muJoConverter failed to load model from input file" << std::endl;
-    return -3;
-  }
-
-  /// TODO
-  muJoConverter.SetDefaultCam();
-
-  muJoConverter.SaveModel();
+  muJoConverter.Convert();
 
   return 0;
 }
