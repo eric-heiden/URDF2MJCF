@@ -28,6 +28,8 @@ public:
 
   bool LoadModel();
 
+  void SetDefaultCam();
+
 private:
   mjModel* m_model = nullptr;
   std::string m_keyPath;

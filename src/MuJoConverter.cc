@@ -4,6 +4,7 @@
 
 #include "MuJoConverter.h"
 #include <fstream>
+#include <memory>
 
 MuJoConverter::MuJoConverter(std::string input, std::string output, std::string keyPath) {
   m_in = input;
@@ -12,7 +13,7 @@ MuJoConverter::MuJoConverter(std::string input, std::string output, std::string 
 }
 
 MuJoConverter::~MuJoConverter() {
-  // deallocated everything
+  /// deallocated everything
   if (m_model) {
     mj_deleteModel(m_model);
   }
@@ -75,4 +76,23 @@ bool MuJoConverter::SaveModel() {
   }
 
   return true;
+}
+
+/// set a default camera automatically
+void MuJoConverter::SetDefaultCam() {
+//  // type and ids
+//  int      type;                  // camera type (mjtCamera) fixed
+//  int      fixedcamid;            // fixed camera id
+//  int      trackbodyid;           // body id to track    base
+//
+//  // abstract camera pose specification
+//  mjtNum   lookat[3];             // lookat point
+//  mjtNum   distance;              // distance to lookat point or tracked body 3 m
+//  mjtNum   azimuth;               // camera azimuth (deg) 90
+//  mjtNum   elevation;             // camera elevation (deg) 60
+  std::shared_ptr<mjvCamera> pCam = std::make_shared<mjvCamera>();
+  mjv_defaultCamera(pCam.get());
+  pCam->azimuth = 90;
+  pCam->elevation = 60;
+
 }
